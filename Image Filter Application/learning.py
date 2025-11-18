@@ -88,6 +88,27 @@ if color_image is not None:
     edges = cv2.Canny(blur_img, 50, 150)
     cv2.imshow('Edges Tabby', edges)
 
+    """
+    cv2.threshold is used mainly for image segmentation, this function will turn a grayscale image into a binary 
+    image of only whites and blacks.
+    
+    In this case a function will be used in order to go through each pixels and it will compare each pixel with the 
+    threshold, if it is above the threshold it will turn the pixel white, if its equal or below it, it will turn the 
+    pixels black
+    
+    The function will have multiple parameters
+        - Source Image, this image MUST be grayscale
+        - threshold value, which is a value that we choose in order to apply the change
+        - max value, this is the value that will be give to those pixels that are above the threshold
+        - threshold type, how the threshold will be applied, cv2.THRESH_BINARY being the most common
+        - ret, is the threshold value used
+        - thresholded image, the resulting image after the process has been applied
+    """
+
+    ret, thresholded_image = cv2.threshold(grayscale_tabby, 127, 255, cv2.THRESH_BINARY)
+
+    cv2.imshow('Threshold Tabby', thresholded_image)
+
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 else:
